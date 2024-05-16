@@ -175,12 +175,22 @@ module.exports = grammar(GO, {
                 seq(
                     field('package', $._package_identifier),
                     '.',
-                    field('name', $._component_identifier),
+                    choice(
+                      seq(
+                        field('name', $._component_identifier),
+                        field('name', $._type_identifier),
+                      ),
+                    ),
                 ),
                 field('name', $._component_identifier),
             ),
             optional(field('arguments', $.argument_list)),
-            optional(field('body', $.component_block)),
+            choice(
+              seq(
+                field('body', $.component_block),
+                field('body', $.literal_value),
+              ),
+            ),
         )),
 
         // This matches a render statement:
