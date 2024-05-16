@@ -7372,30 +7372,12 @@
                     "value": "."
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "FIELD",
-                            "name": "name",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "_component_identifier"
-                            }
-                          },
-                          {
-                            "type": "FIELD",
-                            "name": "name",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "_type_identifier"
-                            }
-                          }
-                        ]
-                      }
-                    ]
+                    "type": "FIELD",
+                    "name": "name",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_component_identifier"
+                    }
                   }
                 ]
               },
@@ -7429,25 +7411,31 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "FIELD",
-                    "name": "body",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "component_block"
-                    }
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "body",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "literal_value"
-                    }
-                  }
-                ]
+                "type": "FIELD",
+                "name": "body",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "component_block"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "body",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "literal_value"
+                }
+              },
+              {
+                "type": "BLANK"
               }
             ]
           }
@@ -8415,6 +8403,18 @@
     [
       "_expression",
       "dynamic_class_attribute_value"
+    ],
+    [
+      "component_block",
+      "literal_value"
+    ],
+    [
+      "literal_value",
+      "expression"
+    ],
+    [
+      "literal_element",
+      "expression"
     ]
   ],
   "precedences": [],

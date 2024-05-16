@@ -21,6 +21,9 @@ module.exports = grammar(GO, {
     conflicts: ($, original) => [
         ...original,
         [$._expression, $.dynamic_class_attribute_value],
+        [$.component_block, $.literal_value],
+        [$.literal_value, $.expression],
+        [$.literal_element, $.expression],
     ],
 
     rules: {
@@ -175,22 +178,13 @@ module.exports = grammar(GO, {
                 seq(
                     field('package', $._package_identifier),
                     '.',
-                    choice(
-                      seq(
-                        field('name', $._component_identifier),
-                        field('name', $._type_identifier),
-                      ),
-                    ),
+                    field('name', $._component_identifier),
                 ),
                 field('name', $._component_identifier),
             ),
             optional(field('arguments', $.argument_list)),
-            choice(
-              seq(
-                field('body', $.component_block),
-                field('body', $.literal_value),
-              ),
-            ),
+            optional(field('body', $.component_block)),
+            optional(field('body', $.literal_value)),
         )),
 
         // This matches a render statement:
